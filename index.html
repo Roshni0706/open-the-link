@@ -16,6 +16,28 @@
         overflow: hidden;
     }
 
+    /* ❤️ Floating Hearts */
+    .heart {
+        position: fixed;
+        bottom: -20px;
+        font-size: 20px;
+        color: rgba(255, 77, 109, 0.7);
+        animation: floatUp 8s linear infinite;
+        z-index: 0;
+    }
+
+    @keyframes floatUp {
+        0% {
+            transform: translateY(0) scale(0.8);
+            opacity: 0;
+        }
+        10% { opacity: 1; }
+        100% {
+            transform: translateY(-110vh) scale(1.3);
+            opacity: 0;
+        }
+    }
+
     .card {
         background: #fff;
         padding: 45px 35px;
@@ -35,7 +57,7 @@
 
     h1 {
         color: #ff4d6d;
-        font-size: 30px;
+        font-size: 28px;
         margin-bottom: 10px;
     }
 
@@ -67,3 +89,91 @@
     #yesBtn {
         background: linear-gradient(135deg, #ff4d6d, #ff758f);
         color: white;
+        margin-right: 20px;
+    }
+
+    #noBtn {
+        background: #eee;
+        color: #333;
+        position: absolute;
+    }
+
+    .result {
+        display: none;
+        margin-top: 25px;
+        animation: fadeUp 0.8s ease;
+    }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result h2 {
+        color: #ff4d6d;
+        font-size: 26px;
+    }
+
+    .result img {
+        width: 100%;
+        border-radius: 18px;
+        margin-top: 18px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    /* 🎊 Confetti */
+    .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        top: -10px;
+        animation: fall 3s linear forwards;
+        z-index: 1;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Vikas 💖</h1>
+    <h2>Will you be my Valentine?</h2>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes 💕</button>
+        <button id="noBtn">No 😜</button>
+    </div>
+
+    <div class="result" id="result">
+        <h2>Congratulations! 🎉</h2>
+        <p>You’ve made a great choice 💑</p>
+        <img src="indeximage.jpg" alt="Us Together">
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const result = document.getElementById("result");
+
+    // No button runs away
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * 260;
+        const y = Math.random() * 70;
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
+
+    // Yes button celebration
+    yesBtn.addEventListener("click", () => {
+        document.querySelector(".buttons").style.display = "none";
+        result.style.display = "block";
+        launchConfetti();
+    });
