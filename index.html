@@ -45,10 +45,6 @@ h1 {
     margin-bottom: 10px;
 }
 
-h2 {
-    margin-top: 0;
-}
-
 .buttons {
     margin-top: 30px;
     display: flex;
@@ -100,7 +96,6 @@ button {
     position: fixed;
     width: 10px;
     height: 10px;
-    background: red;
     top: -10px;
     animation: fall 3s linear infinite;
 }
@@ -116,8 +111,12 @@ button {
 <body>
 
 <div class="card">
-    <h1>Vikas 💖</h1>
-    <h2>Will you be my Valentine?</h2>
+
+    <!-- Question (will hide after YES) -->
+    <div id="question">
+        <h1>Vikas 💖</h1>
+        <h2>Will you be my Valentine?</h2>
+    </div>
 
     <div class="buttons">
         <button id="yesBtn">Yes 💕</button>
@@ -149,6 +148,7 @@ setInterval(() => {
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const result = document.getElementById("result");
+const question = document.getElementById("question");
 
 noBtn.addEventListener("mouseover", () => {
     const x = Math.random() * 120 - 60;
@@ -157,6 +157,7 @@ noBtn.addEventListener("mouseover", () => {
 });
 
 yesBtn.addEventListener("click", () => {
+    question.style.display = "none";
     document.querySelector(".buttons").style.display = "none";
     result.style.display = "block";
 
